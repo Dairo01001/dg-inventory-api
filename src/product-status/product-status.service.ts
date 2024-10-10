@@ -14,7 +14,7 @@ export class ProductStatusService {
     });
   }
 
-  findAll(where: Prisma.ProductStatusWhereInput) {
+  findAll(where?: Prisma.ProductStatusWhereInput) {
     return this.prisma.productStatus.findMany({
       where,
     });

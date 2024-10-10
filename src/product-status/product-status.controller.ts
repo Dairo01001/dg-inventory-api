@@ -6,9 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   ParseIntPipe,
-  ParseBoolPipe,
 } from '@nestjs/common';
 import { ProductStatusService } from './product-status.service';
 import { CreateProductStatusDto } from './dto/create-product-status.dto';
@@ -29,16 +27,8 @@ export class ProductStatusController {
 
   @Get()
   @ApiOkResponse({ type: ProductStatusEntity, isArray: true })
-  findAll(
-    @Query('status', ParseBoolPipe) status: boolean,
-    @Query('name') name: string,
-  ) {
-    return this.productStatusService.findAll({
-      status,
-      name: {
-        contains: name,
-      },
-    });
+  findAll() {
+    return this.productStatusService.findAll();
   }
 
   @Get(':id')
