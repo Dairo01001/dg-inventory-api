@@ -9,6 +9,8 @@ import { UsersModule } from './users/users.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { SubcategoriesModule } from './subcategories/subcategories.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    SubcategoriesModule,
+    AddressModule,
   ],
   controllers: [AppController],
   providers: [AppService],
