@@ -7,12 +7,19 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { DocumentsService } from './documents.service';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { DocumentEntity } from './entities/document.entity';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('documents')
 @ApiTags('documents')
@@ -26,18 +33,24 @@ export class DocumentsController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: DocumentEntity, isArray: true })
   findAll() {
     return this.documentsService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: DocumentEntity })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.documentsService.findOne(id);
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: DocumentEntity })
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -47,6 +60,8 @@ export class DocumentsController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: DocumentEntity })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.documentsService.remove(id);
