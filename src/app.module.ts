@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { SubcategoriesModule } from './subcategories/subcategories.module';
 import { AddressModule } from './address/address.module';
+import { UnitsModule } from './units/units.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AddressModule } from './address/address.module';
     }),
     SubcategoriesModule,
     AddressModule,
+    UnitsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
