@@ -8,6 +8,9 @@ export class UserEntity implements User {
   }
 
   @ApiProperty()
+  numberDocument: string;
+
+  @ApiProperty()
   name: string;
 
   @ApiProperty()

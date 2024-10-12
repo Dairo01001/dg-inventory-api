@@ -107,11 +107,12 @@ model Address {
 }
 
 model User {
-  id       String @id @default(uuid())
-  name     String @db.VarChar(255)
-  phone    String @db.VarChar(20)
-  email    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
+  id             String @id @default(uuid())
+  name           String @db.VarChar(255)
+  phone          String @db.VarChar(20)
+  email          String @unique @db.VarChar(255)
+  password       String @db.VarChar(255)
+  numberDocument String @unique @db.VarChar(50)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

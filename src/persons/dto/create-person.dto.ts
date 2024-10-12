@@ -4,18 +4,18 @@ import {
   IsNotEmpty,
   IsNumber,
   IsNumberString,
-  IsOptional,
   IsString,
   MinLength,
 } from 'class-validator';
 
-export class CreateUserDto {
+export class CreatePersonDto {
   @IsString()
   @IsNotEmpty()
-  @MinLength(5)
+  @MinLength(3)
   @ApiProperty()
   name: string;
 
+  @IsString()
   @IsNumberString()
   @IsNotEmpty()
   @MinLength(10)
@@ -30,28 +30,21 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(8)
   @ApiProperty()
-  password: string;
+  numberDocument: string;
 
   @IsNumber()
   @IsNotEmpty()
   @ApiProperty()
-  roleId: number;
-
-  @IsNumber()
-  @IsOptional()
-  @ApiProperty({ required: false })
-  addressId: number;
+  typeId: number;
 
   @IsNumber()
   @IsNotEmpty()
   @ApiProperty()
   documentId: number;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  @IsNumberString()
   @ApiProperty()
-  numberDocument: string;
+  addressId: number;
 }
