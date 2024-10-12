@@ -22,6 +22,9 @@ export class CategoriesService {
       where: {
         id,
       },
+      include: {
+        subcategories: true,
+      },
     });
 
     if (!category) {
