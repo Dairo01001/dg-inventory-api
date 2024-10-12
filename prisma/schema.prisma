@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -76,6 +70,8 @@ model Product {
   unit                 Unit                   @relation(fields: [unitId], references: [id])
   unitId               Int
   subcategoryOnProduct SubcategoryOnProduct[]
+  incomeDetails        IncomeDetail[]
+  saleDetails          SaleDetail[]
 }
 
 model Role {
@@ -95,7 +91,8 @@ model Document {
   name   String  @unique @db.VarChar(50)
   status Boolean @default(true)
 
-  users User[]
+  users   User[]
+  persons Person[]
 }
 
 model Address {
@@ -105,13 +102,14 @@ model Address {
   number     String @db.VarChar(50)
   complement String @db.VarChar(255)
 
-  user User?
+  user   User?
+  person Person?
 }
 
 model User {
   id       String @id @default(uuid())
   name     String @db.VarChar(255)
-  phone    String @db.VarChar(255)
+  phone    String @db.VarChar(20)
   email    String @unique @db.VarChar(255)
   password String @db.VarChar(255)
 
@@ -124,4 +122,122 @@ model User {
   addressId  Int?     @unique
   document   Document @relation(fields: [documentId], references: [id])
   documentId Int
+  incomes    Income[]
+  sales      Sale[]
+}
+
+model PersonType {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique @db.VarChar(50)
+  status Boolean @default(true)
+
+  persons Person[]
+}
+
+model Person {
+  id             String @id @default(uuid())
+  name           String @db.VarChar(255)
+  phone          String @db.VarChar(20)
+  email          String @unique @db.VarChar(255)
+  numberDocument String @unique @db.VarChar(50)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  type       PersonType @relation(fields: [typeId], references: [id])
+  typeId     Int
+  document   Document   @relation(fields: [documentId], references: [id])
+  documentId Int
+  address    Address?   @relation(fields: [addressId], references: [id])
+  addressId  Int?       @unique
+  incomes    Income[]
+  sales      Sale[]
+}
+
+model ReceiptType {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique @db.VarChar(50)
+  status Boolean @default(true)
+
+  incomes Income[]
+  Sale    Sale[]
+}
+
+model IncomeStatus {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique @db.VarChar(50)
+  status Boolean @default(true)
+
+  incomes Income[]
+}
+
+model IncomeDetail {
+  id     Int @id @default(autoincrement())
+  amount Int
+  tax    Int @default(0)
+  price  Int
+
+  income    Income  @relation(fields: [incomeId], references: [id])
+  incomeId  Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Income {
+  id            Int      @id @default(autoincrement())
+  seriesReceipt String   @unique @db.VarChar(50)
+  numberReceipt String   @unique @db.VarChar(50)
+  tax           Decimal  @db.Decimal(4, 2)
+  total         Decimal  @db.Decimal(10, 2)
+  date          DateTime
+
+  distributor   Person         @relation(fields: [distributorId], references: [id])
+  distributorId String
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String
+  receiptType   ReceiptType    @relation(fields: [receiptTypeId], references: [id])
+  receiptTypeId Int
+  status        IncomeStatus   @relation(fields: [statusId], references: [id])
+  statusId      Int
+  incomeDetails IncomeDetail[]
+}
+
+model SaleStatus {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique @db.VarChar(50)
+  status Boolean @default(true)
+
+  sales Sale[]
+}
+
+model SaleDetail {
+  id       Int @id @default(autoincrement())
+  amount   Int
+  tax      Int @default(0)
+  discount Int @default(0)
+  price    Int
+
+  sale      Sale    @relation(fields: [saleId], references: [id])
+  saleId    Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Sale {
+  id            Int      @id @default(autoincrement())
+  seriesReceipt String   @unique @db.VarChar(50)
+  numberReceipt String   @unique @db.VarChar(50)
+  tax           Decimal  @db.Decimal(4, 2)
+  total         Decimal  @db.Decimal(10, 2)
+  date          DateTime
+
+  client        Person       @relation(fields: [clientId], references: [id])
+  clientId      String
+  user          User         @relation(fields: [userId], references: [id])
+  userId        String
+  receiptType   ReceiptType  @relation(fields: [receiptTypeId], references: [id])
+  receiptTypeId Int
+  status        SaleStatus   @relation(fields: [statusId], references: [id])
+  statusId      Int
+  saleDetails   SaleDetail[]
 }
