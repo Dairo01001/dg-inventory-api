@@ -22,7 +22,7 @@ import { DocumentEntity } from './entities/document.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('documents')
-@ApiTags('documents')
+@ApiTags('Documents')
 export class DocumentsController {
   constructor(private readonly documentsService: DocumentsService) {}
 

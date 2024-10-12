@@ -24,7 +24,7 @@ import { AddCategoryDto } from './dto/add-category.dto';
 import { SubcategoryOnProductEntity } from './entities/subcategory-on-product.entity';
 
 @Controller('products')
-@ApiTags('products')
+@ApiTags('Products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 

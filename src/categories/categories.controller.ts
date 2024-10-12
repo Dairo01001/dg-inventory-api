@@ -22,7 +22,7 @@ import { CategoryEntity } from './entities/category.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('categories')
-@ApiTags('categories')
+@ApiTags('Categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 

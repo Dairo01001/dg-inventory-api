@@ -22,7 +22,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AddressEntity } from './entities/address.entity';
 
 @Controller('address')
-@ApiTags('address')
+@ApiTags('Address')
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}
 

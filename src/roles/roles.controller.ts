@@ -22,7 +22,7 @@ import { RoleEntity } from './entities/role.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('roles')
-@ApiTags('roles')
+@ApiTags('Roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 

@@ -22,7 +22,7 @@ import { SubcategoryEntity } from './entities/subcategory.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('subcategories')
-@ApiTags('subcategories')
+@ApiTags('Subcategories')
 export class SubcategoriesController {
   constructor(private readonly subcategoriesService: SubcategoriesService) {}
 
