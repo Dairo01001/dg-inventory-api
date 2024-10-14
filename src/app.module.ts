@@ -15,6 +15,8 @@ import { PersonTypesModule } from './person-types/person-types.module';
 import { PersonsModule } from './persons/persons.module';
 import { ReceiptTypesModule } from './receipt-types/receipt-types.module';
 import { IncomeStatusModule } from './income-status/income-status.module';
+import { IncomesModule } from './incomes/incomes.module';
+import { SaleStatusModule } from './sale-status/sale-status.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { IncomeStatusModule } from './income-status/income-status.module';
     PersonsModule,
     ReceiptTypesModule,
     IncomeStatusModule,
+    IncomesModule,
+    SaleStatusModule,
   ],
 })
 export class AppModule {}

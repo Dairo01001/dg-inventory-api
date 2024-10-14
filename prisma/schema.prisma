@@ -190,7 +190,7 @@ model Income {
   numberReceipt String   @unique @db.VarChar(50)
   tax           Decimal  @db.Decimal(4, 2)
   total         Decimal  @db.Decimal(10, 2)
-  date          DateTime
+  date          DateTime @default(now())
 
   distributor   Person         @relation(fields: [distributorId], references: [id])
   distributorId String
@@ -230,7 +230,7 @@ model Sale {
   numberReceipt String   @unique @db.VarChar(50)
   tax           Decimal  @db.Decimal(4, 2)
   total         Decimal  @db.Decimal(10, 2)
-  date          DateTime
+  date          DateTime @default(now())
 
   client        Person       @relation(fields: [clientId], references: [id])
   clientId      String
