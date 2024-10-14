@@ -17,6 +17,7 @@ import { ReceiptTypesModule } from './receipt-types/receipt-types.module';
 import { IncomeStatusModule } from './income-status/income-status.module';
 import { IncomesModule } from './incomes/incomes.module';
 import { SaleStatusModule } from './sale-status/sale-status.module';
+import { SalesModule } from './sales/sales.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { SaleStatusModule } from './sale-status/sale-status.module';
     IncomeStatusModule,
     IncomesModule,
     SaleStatusModule,
+    SalesModule,
   ],
 })
 export class AppModule {}
